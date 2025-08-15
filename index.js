@@ -109,6 +109,11 @@ app.get('/profile', authenticateToken, async (req, res) => {
   }
 });
 
+// for uptimerobot
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', time: new Date().toISOString() });
+});
+
 app.listen(PORT, () =>
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 );
