@@ -66,10 +66,10 @@ app.post("/login", async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
     const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+  { id: user._id, email: user.email },
+  process.env.JWT_SECRET,
+  { expiresIn: "30d" }
+);
 
     res.json({
       message: `Welcome back, ${user.name}`,
@@ -108,6 +108,7 @@ app.get('/profile', authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 // for uptimerobot
 app.get('/health', (req, res) => {
