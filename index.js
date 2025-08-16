@@ -110,6 +110,22 @@ app.get('/profile', authenticateToken, async (req, res) => {
 });
 
 
+// about page routes :- 
+app.get('/about', authenticateToken, async (req, res) => {
+  try {
+    // req.user me token payload hai
+    res.json({
+      message: "This is the protected About page content",
+      user: { id: req.user.id, email: req.user.email },
+      timestamp: new Date().toISOString()
+    });
+  } catch (err) {
+    console.error("About error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 // for uptimerobot
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', time: new Date().toISOString() });
